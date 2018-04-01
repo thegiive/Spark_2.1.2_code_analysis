@@ -55,6 +55,7 @@ class SparkConf(loadDefaults: Boolean) extends Cloneable with Logging with Seria
   def this() = this(true)
 
   // #Wisely: SparkConfig container 
+  // #todo : need to figure out why use ConcurrentHashMap
   private val settings = new ConcurrentHashMap[String, String]()
 
   @transient private lazy val reader: ConfigReader = {
@@ -72,6 +73,7 @@ class SparkConf(loadDefaults: Boolean) extends Cloneable with Logging with Seria
 
   private[spark] def loadFromSystemProperties(silent: Boolean): SparkConf = {
     // Load any spark.* system properties
+    // #wisely : define in org.apache.spark.util.Utils.getSystemProperties 
     for ((key, value) <- Utils.getSystemProperties if key.startsWith("spark.")) {
       set(key, value, silent)
     }
@@ -84,6 +86,7 @@ class SparkConf(loadDefaults: Boolean) extends Cloneable with Logging with Seria
   }
 
   private[spark] def set(key: String, value: String, silent: Boolean): SparkConf = {
+    // #wisely : exception handling 
     if (key == null) {
       throw new NullPointerException("null key")
     }
@@ -93,6 +96,7 @@ class SparkConf(loadDefaults: Boolean) extends Cloneable with Logging with Seria
     if (!silent) {
       logDeprecationWarning(key)
     }
+    // #wisely : set setting into global config container "settings"
     settings.put(key, value)
     this
   }
