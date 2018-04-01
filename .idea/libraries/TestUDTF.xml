@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="TestUDTF">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/sql/hive-thriftserver/target/scala-2.11/test-classes/TestUDTF.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

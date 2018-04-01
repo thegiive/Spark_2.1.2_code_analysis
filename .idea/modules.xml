@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/sql/hive-thriftserver/src/gen/gen.iml" filepath="$PROJECT_DIR$/sql/hive-thriftserver/src/gen/gen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sql/catalyst/target/generated-sources/generated-sources.iml" filepath="$PROJECT_DIR$/sql/catalyst/target/generated-sources/generated-sources.iml" />
+      <module fileurl="file://$PROJECT_DIR$/graphx/src/main/main.iml" filepath="$PROJECT_DIR$/graphx/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/network-shuffle/src/main/main1.iml" filepath="$PROJECT_DIR$/common/network-shuffle/src/main/main1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sql/hive/src/main/main10.iml" filepath="$PROJECT_DIR$/sql/hive/src/main/main10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sql/catalyst/src/main/main11.iml" filepath="$PROJECT_DIR$/sql/catalyst/src/main/main11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/external/kafka-0-8/src/main/main12.iml" filepath="$PROJECT_DIR$/external/kafka-0-8/src/main/main12.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sql/hive-thriftserver/src/main/main13.iml" filepath="$PROJECT_DIR$/sql/hive-thriftserver/src/main/main13.iml" />
+      <module fileurl="file://$PROJECT_DIR$/external/kafka-0-10/src/main/main14.iml" filepath="$PROJECT_DIR$/external/kafka-0-10/src/main/main14.iml" />
+      <module fileurl="file://$PROJECT_DIR$/external/flume/src/main/main15.iml" filepath="$PROJECT_DIR$/external/flume/src/main/main15.iml" />
+      <module fileurl="file://$PROJECT_DIR$/external/kafka-0-10-sql/src/main/main16.iml" filepath="$PROJECT_DIR$/external/kafka-0-10-sql/src/main/main16.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/network-yarn/src/main/main17.iml" filepath="$PROJECT_DIR$/common/network-yarn/src/main/main17.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/tags/src/main/main18.iml" filepath="$PROJECT_DIR$/common/tags/src/main/main18.iml" />
+      <module fileurl="file://$PROJECT_DIR$/streaming/src/main/main19.iml" filepath="$PROJECT_DIR$/streaming/src/main/main19.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sql/core/src/main/main2.iml" filepath="$PROJECT_DIR$/sql/core/src/main/main2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/src/main/main20.iml" filepath="$PROJECT_DIR$/core/src/main/main20.iml" />
+      <module fileurl="file://$PROJECT_DIR$/examples/src/main/main3.iml" filepath="$PROJECT_DIR$/examples/src/main/main3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/sketch/src/main/main4.iml" filepath="$PROJECT_DIR$/common/sketch/src/main/main4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/network-common/src/main/main5.iml" filepath="$PROJECT_DIR$/common/network-common/src/main/main5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/launcher/src/main/main6.iml" filepath="$PROJECT_DIR$/launcher/src/main/main6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/external/kinesis-asl/src/main/main7.iml" filepath="$PROJECT_DIR$/external/kinesis-asl/src/main/main7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/unsafe/src/main/main8.iml" filepath="$PROJECT_DIR$/common/unsafe/src/main/main8.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mllib/src/main/main9.iml" filepath="$PROJECT_DIR$/mllib/src/main/main9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/external/kafka-0-8/src/test/test.iml" filepath="$PROJECT_DIR$/external/kafka-0-8/src/test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/external/flume/src/test/test1.iml" filepath="$PROJECT_DIR$/external/flume/src/test/test1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/src/test/test10.iml" filepath="$PROJECT_DIR$/core/src/test/test10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mllib/src/test/test11.iml" filepath="$PROJECT_DIR$/mllib/src/test/test11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/external/kafka-0-10/src/test/test12.iml" filepath="$PROJECT_DIR$/external/kafka-0-10/src/test/test12.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sql/core/src/test/test13.iml" filepath="$PROJECT_DIR$/sql/core/src/test/test13.iml" />
+      <module fileurl="file://$PROJECT_DIR$/external/kinesis-asl/src/test/test14.iml" filepath="$PROJECT_DIR$/external/kinesis-asl/src/test/test14.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/network-common/src/test/test15.iml" filepath="$PROJECT_DIR$/common/network-common/src/test/test15.iml" />
+      <module fileurl="file://$PROJECT_DIR$/streaming/src/test/test2.iml" filepath="$PROJECT_DIR$/streaming/src/test/test2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/launcher/src/test/test3.iml" filepath="$PROJECT_DIR$/launcher/src/test/test3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sql/hive/src/test/test4.iml" filepath="$PROJECT_DIR$/sql/hive/src/test/test4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/network-shuffle/src/test/test5.iml" filepath="$PROJECT_DIR$/common/network-shuffle/src/test/test5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/unsafe/src/test/test6.iml" filepath="$PROJECT_DIR$/common/unsafe/src/test/test6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/external/java8-tests/src/test/test7.iml" filepath="$PROJECT_DIR$/external/java8-tests/src/test/test7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/tags/src/test/test8.iml" filepath="$PROJECT_DIR$/common/tags/src/test/test8.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sql/catalyst/src/test/test9.iml" filepath="$PROJECT_DIR$/sql/catalyst/src/test/test9.iml" />
+    </modules>
+  </component>
+</project>

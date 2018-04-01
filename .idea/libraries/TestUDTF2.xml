@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="TestUDTF2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/core/target/scala-2.11/test-classes/TestUDTF.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

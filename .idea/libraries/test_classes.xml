@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="test-classes">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/sql/hive/target/scala-2.11/test-classes/TestUDTF.jar!/" />
+      <root url="jar://$PROJECT_DIR$/sql/hive/target/scala-2.11/test-classes/hive-hcatalog-core-0.13.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/sql/hive/target/scala-2.11/test-classes/hive-contrib-0.13.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
