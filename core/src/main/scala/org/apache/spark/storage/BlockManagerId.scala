@@ -33,6 +33,8 @@ import org.apache.spark.util.Utils
  * of ID objects. Also, constructor parameters are private to ensure that parameters cannot be
  * modified from outside this class.
  */
+
+// #wisely : BlockManager is object store BlockMangerID 
 @DeveloperApi
 class BlockManagerId private (
     private var executorId_ : String,
@@ -63,11 +65,13 @@ class BlockManagerId private (
 
   def topologyInfo: Option[String] = topologyInfo_
 
+  // #wisely : check if this blockmanger is driver. There is some migration code involved 
   def isDriver: Boolean = {
     executorId == SparkContext.DRIVER_IDENTIFIER ||
       executorId == SparkContext.LEGACY_DRIVER_IDENTIFIER
   }
 
+  // #wisely : serialize all blockmanagerid information and write to binary stream 
   override def writeExternal(out: ObjectOutput): Unit = Utils.tryOrIOException {
     out.writeUTF(executorId_)
     out.writeUTF(host_)
@@ -77,6 +81,7 @@ class BlockManagerId private (
     topologyInfo.foreach(out.writeUTF(_))
   }
 
+  // #wisely : read from external binary stream and receive the blockmanagerid information
   override def readExternal(in: ObjectInput): Unit = Utils.tryOrIOException {
     executorId_ = in.readUTF()
     host_ = in.readUTF()
@@ -90,6 +95,7 @@ class BlockManagerId private (
 
   override def toString: String = s"BlockManagerId($executorId, $host, $port, $topologyInfo)"
 
+  // #todo: look important and trace later : why write fixied hash code algo inside blockmanger class ? 
   override def hashCode: Int =
     ((executorId.hashCode * 41 + host.hashCode) * 41 + port) * 41 + topologyInfo.hashCode
 
