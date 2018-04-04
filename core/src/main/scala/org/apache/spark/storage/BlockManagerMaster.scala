@@ -28,6 +28,7 @@ import org.apache.spark.storage.BlockManagerMessages._
 import org.apache.spark.util.{RpcUtils, ThreadUtils}
 
 private[spark]
+// #wisely : BlockManagerMaster hold BlockManagerMasterEndpoint's ref id to communication with endpoint
 class BlockManagerMaster(
     var driverEndpoint: RpcEndpointRef,
     conf: SparkConf,
