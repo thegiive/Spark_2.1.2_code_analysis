@@ -55,9 +55,13 @@ import org.apache.spark.network.util.TransportFrameDecoder;
  * channel. As each TransportChannelHandler contains a TransportClient, this enables server
  * processes to send messages back to the client on an existing channel.
  */
+// #wisely : A context to include TransportServer and TransportClientFactory
+  //TransportServer is RPC connection instance
+  // TransportClientFactory is factory of RPC client
 public class TransportContext {
   private static final Logger logger = LoggerFactory.getLogger(TransportContext.class);
 
+  // #wisely : Include conf and rpc handler 
   private final TransportConf conf;
   private final RpcHandler rpcHandler;
   private final boolean closeIdleConnections;
