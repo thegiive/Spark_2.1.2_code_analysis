@@ -112,6 +112,7 @@ public class TransportChannelHandler extends ChannelInboundHandlerAdapter {
     super.channelInactive(ctx);
   }
 
+  // #wisely : 
   @Override
   public void channelRead(ChannelHandlerContext ctx, Object request) throws Exception {
     if (request instanceof RequestMessage) {

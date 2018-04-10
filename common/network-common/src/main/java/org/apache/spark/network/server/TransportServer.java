@@ -43,6 +43,7 @@ import org.apache.spark.network.util.TransportConf;
 /**
  * Server for the efficient, low-level streaming service.
  */
+// #wisely : RPC framework's service layer
 public class TransportServer implements Closeable {
   private static final Logger logger = LoggerFactory.getLogger(TransportServer.class);
 
@@ -85,6 +86,7 @@ public class TransportServer implements Closeable {
     return port;
   }
 
+  // #wisely : initial server 
   private void init(String hostToBind, int portToBind) {
 
     IOMode ioMode = IOMode.valueOf(conf.ioMode());
@@ -117,6 +119,7 @@ public class TransportServer implements Closeable {
       @Override
       protected void initChannel(SocketChannel ch) throws Exception {
         RpcHandler rpcHandler = appRpcHandler;
+        // #wisely : do bootstrap action
         for (TransportServerBootstrap bootstrap : bootstraps) {
           rpcHandler = bootstrap.doBootstrap(ch, rpcHandler);
         }

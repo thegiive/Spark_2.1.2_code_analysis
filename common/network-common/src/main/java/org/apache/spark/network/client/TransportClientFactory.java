@@ -64,6 +64,7 @@ public class TransportClientFactory implements Closeable {
     TransportClient[] clients;
     Object[] locks;
 
+    // #wisely : ClientPool is TransportClient's container
     ClientPool(int size) {
       clients = new TransportClient[size];
       locks = new Object[size];
@@ -78,6 +79,7 @@ public class TransportClientFactory implements Closeable {
   private final TransportContext context;
   private final TransportConf conf;
   private final List<TransportClientBootstrap> clientBootstraps;
+  // #wisely : initial a clientPool Hashmap socketAddr -> clientpool
   private final ConcurrentHashMap<SocketAddress, ClientPool> connectionPool;
 
   /** Random number generator for picking connections between peers. */
@@ -93,6 +95,7 @@ public class TransportClientFactory implements Closeable {
       List<TransportClientBootstrap> clientBootstraps) {
     this.context = Preconditions.checkNotNull(context);
     this.conf = context.getConf();
+    // #wisely : create client bootstraps list from agrs
     this.clientBootstraps = Lists.newArrayList(Preconditions.checkNotNull(clientBootstraps));
     this.connectionPool = new ConcurrentHashMap<>();
     this.numConnectionsPerPeer = conf.numConnectionsPerPeer();
@@ -131,12 +134,15 @@ public class TransportClientFactory implements Closeable {
       InetSocketAddress.createUnresolved(remoteHost, remotePort);
 
     // Create the ClientPool if we don't have it yet.
+    // #wisely : each addr map to a clientpool container 
     ClientPool clientPool = connectionPool.get(unresolvedAddress);
     if (clientPool == null) {
       connectionPool.putIfAbsent(unresolvedAddress, new ClientPool(numConnectionsPerPeer));
       clientPool = connectionPool.get(unresolvedAddress);
     }
 
+    // #wisely : random get a TransportClient and handle 
+    // #todo: look important and trace later : why random get a client ? 
     int clientIndex = rand.nextInt(numConnectionsPerPeer);
     TransportClient cachedClient = clientPool.clients[clientIndex];
 
@@ -153,12 +159,14 @@ public class TransportClientFactory implements Closeable {
       if (cachedClient.isActive()) {
         logger.trace("Returning cached connection to {}: {}",
           cachedClient.getSocketAddress(), cachedClient);
+        // #wisely : return a existing connection opne TransportClient
         return cachedClient;
       }
     }
 
     // If we reach here, we don't have an existing connection open. Let's create a new one.
     // Multiple threads might race here to create new connections. Keep only one of them active.
+    // #wisely : we don't have existing connection open, create a new one
     final long preResolveHost = System.nanoTime();
     final InetSocketAddress resolvedAddress = new InetSocketAddress(remoteHost, remotePort);
     final long hostResolveTimeMs = (System.nanoTime() - preResolveHost) / 1000000;

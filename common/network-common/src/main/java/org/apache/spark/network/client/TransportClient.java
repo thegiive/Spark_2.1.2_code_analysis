@@ -71,6 +71,7 @@ import static org.apache.spark.network.util.NettyUtils.getRemoteAddress;
  *
  * Concurrency: thread safe and can be called from multiple threads.
  */
+// #todo: look important and trace later : need netty knowledge to understabd
 public class TransportClient implements Closeable {
   private static final Logger logger = LoggerFactory.getLogger(TransportClient.class);
 

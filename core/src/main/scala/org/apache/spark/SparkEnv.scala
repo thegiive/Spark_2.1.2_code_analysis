@@ -52,6 +52,7 @@ import org.apache.spark.util.{RpcUtils, Utils}
  * NOTE: This is not intended for external use. This is exposed for Shark and may be made private
  *       in a future release.
  */
+
 @DeveloperApi
 class SparkEnv (
     val executorId: String,

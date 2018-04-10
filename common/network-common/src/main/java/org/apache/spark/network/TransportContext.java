@@ -143,6 +143,7 @@ public class TransportContext {
    * be used to communicate on this channel. The TransportClient is directly associated with a
    * ChannelHandler to ensure all users of the same channel get the same TransportClient object.
    */
+  // #wisely : initialize netty channel pipeline for client and server
   public TransportChannelHandler initializePipeline(
       SocketChannel channel,
       RpcHandler channelRpcHandler) {
@@ -169,10 +170,13 @@ public class TransportContext {
    * properties (such as the remoteAddress()) may not be available yet.
    */
   private TransportChannelHandler createChannelHandler(Channel channel, RpcHandler rpcHandler) {
+    // #wisely : handler for response
     TransportResponseHandler responseHandler = new TransportResponseHandler(channel);
     TransportClient client = new TransportClient(channel, responseHandler);
+    // #wisely : handler for request 
     TransportRequestHandler requestHandler = new TransportRequestHandler(channel, client,
       rpcHandler);
+    // #wisely : proxy TransportResponseHandler,TransportRequestHandler and add some tranport handling
     return new TransportChannelHandler(client, responseHandler, requestHandler,
       conf.connectionTimeoutMs(), closeIdleConnections);
   }
