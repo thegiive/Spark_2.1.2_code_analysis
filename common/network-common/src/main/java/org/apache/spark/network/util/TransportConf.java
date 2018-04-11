@@ -43,6 +43,7 @@ public class TransportConf {
   private final String SPARK_NETWORK_IO_RETRYWAIT_KEY;
   private final String SPARK_NETWORK_IO_LAZYFD_KEY;
 
+  // #wisely : conf is real config provider 
   private final ConfigProvider conf;
 
   private final String module;
@@ -50,6 +51,7 @@ public class TransportConf {
   public TransportConf(String module, ConfigProvider conf) {
     this.module = module;
     this.conf = conf;
+    // #wisely : gen config key 
     SPARK_NETWORK_IO_MODE_KEY = getConfKey("io.mode");
     SPARK_NETWORK_IO_PREFERDIRECTBUFS_KEY = getConfKey("io.preferDirectBufs");
     SPARK_NETWORK_IO_CONNECTIONTIMEOUT_KEY = getConfKey("io.connectionTimeout");

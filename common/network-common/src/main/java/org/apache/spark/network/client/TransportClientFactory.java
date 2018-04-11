@@ -60,6 +60,7 @@ import org.apache.spark.network.util.TransportConf;
 public class TransportClientFactory implements Closeable {
 
   /** A simple data structure to track the pool of clients between two peer nodes. */
+  // #wisely : Client pool's initial 
   private static class ClientPool {
     TransportClient[] clients;
     Object[] locks;
@@ -98,11 +99,17 @@ public class TransportClientFactory implements Closeable {
     // #wisely : create client bootstraps list from agrs
     this.clientBootstraps = Lists.newArrayList(Preconditions.checkNotNull(clientBootstraps));
     this.connectionPool = new ConcurrentHashMap<>();
+    // #wisely : connection number between peer
     this.numConnectionsPerPeer = conf.numConnectionsPerPeer();
     this.rand = new Random();
 
+    // #wisely : default is nio , epoll
+    // #todo: look important and trace later : find out nio/epoll's difference
     IOMode ioMode = IOMode.valueOf(conf.ioMode());
+    // #wisely : Returns the correct (client) SocketChannel class based on IOMode.
     this.socketChannelClass = NettyUtils.getClientChannelClass(ioMode);
+    
+    // #todo: look important and trace later : Netty stuff. Need to survey netty
     this.workerGroup = NettyUtils.createEventLoop(
         ioMode,
         conf.clientThreads(),
@@ -142,7 +149,7 @@ public class TransportClientFactory implements Closeable {
     }
 
     // #wisely : random get a TransportClient and handle 
-    // #todo: look important and trace later : why random get a client ? 
+    // random for load balancing
     int clientIndex = rand.nextInt(numConnectionsPerPeer);
     TransportClient cachedClient = clientPool.clients[clientIndex];
 

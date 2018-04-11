@@ -433,6 +433,8 @@ public class SparkSaslSuite {
 
   }
 
+  
+  // #wisely : implement TransportServerBootStrap
   private static class EncryptionCheckerBootstrap extends ChannelOutboundHandlerAdapter
     implements TransportServerBootstrap {
 
@@ -461,6 +463,7 @@ public class SparkSaslSuite {
 
   }
 
+  // #wisely : implement TransportServerBootStrap
   private static class EncryptionDisablerBootstrap implements TransportClientBootstrap {
 
     @Override

@@ -46,6 +46,7 @@ object SparkTransportConf {
    *                       use the given number of cores, rather than all of the machine's cores.
    *                       This restriction will only occur if these properties are not already set.
    */
+  // #wisely : fetch config from sparkConf
   def fromSparkConf(_conf: SparkConf, module: String, numUsableCores: Int = 0): TransportConf = {
     val conf = _conf.clone
 
@@ -65,6 +66,7 @@ object SparkTransportConf {
    * Returns the default number of threads for both the Netty client and server thread pools.
    * If numUsableCores is 0, we will use Runtime get an approximate number of available cores.
    */
+  // #wisely : get number of threads for transmission. Max is 8 , min is numUsableCores or availableProcessors 
   private def defaultNumThreads(numUsableCores: Int): Int = {
     val availableCores =
       if (numUsableCores > 0) numUsableCores else Runtime.getRuntime.availableProcessors()
