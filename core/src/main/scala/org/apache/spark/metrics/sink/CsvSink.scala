@@ -26,6 +26,7 @@ import com.codahale.metrics.{CsvReporter, MetricRegistry}
 import org.apache.spark.SecurityManager
 import org.apache.spark.metrics.MetricsSystem
 
+// #wisely : for output metric to CSV output 
 private[spark] class CsvSink(val property: Properties, val registry: MetricRegistry,
     securityMgr: SecurityManager) extends Sink {
   val CSV_KEY_PERIOD = "period"

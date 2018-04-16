@@ -29,6 +29,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler
 import org.apache.spark.{SecurityManager, SparkConf}
 import org.apache.spark.ui.JettyUtils._
 
+// #wisely : output metrix to SparkUI 
 private[spark] class MetricsServlet(
     val property: Properties,
     val registry: MetricRegistry,
@@ -45,9 +46,12 @@ private[spark] class MetricsServlet(
   val servletShowSample = Option(property.getProperty(SERVLET_KEY_SAMPLE)).map(_.toBoolean)
     .getOrElse(SERVLET_DEFAULT_SAMPLE)
 
+  // #todo: look important and trace later : figure out what is this
   val mapper = new ObjectMapper().registerModule(
     new MetricsModule(TimeUnit.SECONDS, TimeUnit.MILLISECONDS, servletShowSample))
 
+  
+  // #wisely : Create a context handler that responds to a request with the given path prefix  
   def getHandlers(conf: SparkConf): Array[ServletContextHandler] = {
     Array[ServletContextHandler](
       createServletHandler(servletPath,

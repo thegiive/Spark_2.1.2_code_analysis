@@ -17,6 +17,7 @@
 
 package org.apache.spark.metrics.sink
 
+// #wisely : for Sink class usage 
 private[spark] trait Sink {
   def start(): Unit
   def stop(): Unit

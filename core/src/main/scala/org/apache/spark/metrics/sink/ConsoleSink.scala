@@ -25,6 +25,7 @@ import com.codahale.metrics.{ConsoleReporter, MetricRegistry}
 import org.apache.spark.SecurityManager
 import org.apache.spark.metrics.MetricsSystem
 
+// #wisely : output the message to System.out
 private[spark] class ConsoleSink(val property: Properties, val registry: MetricRegistry,
     securityMgr: SecurityManager) extends Sink {
   val CONSOLE_DEFAULT_PERIOD = 10
@@ -45,6 +46,7 @@ private[spark] class ConsoleSink(val property: Properties, val registry: MetricR
 
   MetricsSystem.checkMinimalPollingPeriod(pollUnit, pollPeriod)
 
+  // #todo: look important and trace later : check the ConsoleReporter usage 
   val reporter: ConsoleReporter = ConsoleReporter.forRegistry(registry)
       .convertDurationsTo(TimeUnit.MILLISECONDS)
       .convertRatesTo(TimeUnit.SECONDS)

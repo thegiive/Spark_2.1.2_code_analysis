@@ -21,6 +21,7 @@ import com.codahale.metrics.{Gauge, MetricRegistry}
 
 import org.apache.spark.metrics.source.Source
 
+// #wisely : register master's status like workers/aliveworkers/apps/waittingApps
 private[spark] class MasterSource(val master: Master) extends Source {
   override val metricRegistry = new MetricRegistry()
   override val sourceName = "master"
