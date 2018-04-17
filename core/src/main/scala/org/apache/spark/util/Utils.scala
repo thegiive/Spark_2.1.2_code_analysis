@@ -61,6 +61,7 @@ import org.apache.spark.network.util.JavaUtils
 import org.apache.spark.serializer.{DeserializationStream, SerializationStream, SerializerInstance}
 
 /** CallSite represents a place in user code. It can have a short and a long form. */
+// #wisely : Short msg and long msg
 private[spark] case class CallSite(shortForm: String, longForm: String)
 
 private[spark] object CallSite {

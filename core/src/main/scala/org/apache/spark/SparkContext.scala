@@ -70,9 +70,12 @@ import org.apache.spark.util._
  * @param config a Spark Config object describing the application configuration. Any settings in
  *   this config overrides the default configs as well as system properties.
  */
+
+// #wisely : Spark Driver initial SparkContext for spark application
 class SparkContext(config: SparkConf) extends Logging {
 
   // The call site where this SparkContext was constructed.
+  // #wisely : store thread msg from stack top
   private val creationSite: CallSite = Utils.getCallSite()
 
   // If true, log warnings instead of throwing exceptions when multiple SparkContexts are active
@@ -195,21 +198,29 @@ class SparkContext(config: SparkConf) extends Logging {
   private var _conf: SparkConf = _
   private var _eventLogDir: Option[URI] = None
   private var _eventLogCodec: Option[String] = None
+  // #wisely : Spark running env for executor
+  // #wisely : also driver also include SparkENV
   private var _env: SparkEnv = _
   private var _jobProgressListener: JobProgressListener = _
+  // #wisely : track some metrix msg.
   private var _statusTracker: SparkStatusTracker = _
+  // #wisely : show metrix from SparkStatusTracker
   private var _progressBar: Option[ConsoleProgressBar] = None
   private var _ui: Option[SparkUI] = None
   private var _hadoopConfiguration: Configuration = _
   private var _executorMemory: Int = _
   private var _schedulerBackend: SchedulerBackend = _
+  // #wisely : TaskScheduler will allocate resource to task
   private var _taskScheduler: TaskScheduler = _
+  // #wisely : receive heartbeat msg and give msg to taskscheduler
   private var _heartbeatReceiver: RpcEndpointRef = _
+  // #wisely : DAG Scheduler create job, set up DAG RDD to different stage, sumit stage
   @volatile private var _dagScheduler: DAGScheduler = _
   private var _applicationId: String = _
   private var _applicationAttemptId: Option[String] = None
   private var _eventLogger: Option[EventLoggingListener] = None
   private var _executorAllocationManager: Option[ExecutorAllocationManager] = None
+  // #wisely : async clean the RDD which out of application scope
   private var _cleaner: Option[ContextCleaner] = None
   private var _listenerBusStarted: Boolean = false
   private var _jars: Seq[String] = _
@@ -247,6 +258,7 @@ class SparkContext(config: SparkConf) extends Logging {
   def isStopped: Boolean = stopped.get()
 
   // An asynchronous listener bus for Spark events
+  // #wisely : all events manager
   private[spark] val listenerBus = new LiveListenerBus(this)
 
   // This function allows components created by SparkEnv to be mocked in unit tests:
@@ -274,6 +286,8 @@ class SparkContext(config: SparkConf) extends Logging {
 
   private[spark] def progressBar: Option[ConsoleProgressBar] = _progressBar
 
+  // #wisely : spark UI
+  // #wisely : all metric from LiveListenBus will report to UI
   private[spark] def ui: Option[SparkUI] = _ui
 
   def uiWebUrl: Option[String] = _ui.map(_.webUrl)
