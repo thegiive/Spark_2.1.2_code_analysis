@@ -61,6 +61,7 @@ private[spark] class SparkUI private (
   var appId: String = _
 
   /** Initialize all components of the server. */
+  // #wisely : initialize SparkUI component
   def initialize() {
     val jobsTab = new JobsTab(this)
     attachTab(jobsTab)
@@ -69,7 +70,9 @@ private[spark] class SparkUI private (
     attachTab(new StorageTab(this))
     attachTab(new EnvironmentTab(this))
     attachTab(new ExecutorsTab(this))
+    // #wisely : add static handler for static resource org/apache/spark/ui/static/ dir
     attachHandler(createStaticHandler(SparkUI.STATIC_RESOURCE_DIR, "/static"))
+    // #wisely : redirect root request to /jobs/ tab
     attachHandler(createRedirectHandler("/", "/jobs/", basePath = basePath))
     attachHandler(ApiRootResource.getServletHandler(this))
     // These should be POST only, but, the YARN AM proxy won't proxy POSTs
@@ -133,6 +136,7 @@ private[spark] class SparkUI private (
   }
 }
 
+// #wisely : all tab will extend SparkUITab
 private[spark] abstract class SparkUITab(parent: SparkUI, prefix: String)
   extends WebUITab(parent, prefix) {
 
@@ -199,6 +203,7 @@ private[spark] object SparkUI {
       jobProgressListener: Option[JobProgressListener] = None,
       startTime: Long): SparkUI = {
 
+    // #wisely : add a ton of listener and bind to listernerBus
     val _jobProgressListener: JobProgressListener = jobProgressListener.getOrElse {
       val listener = new JobProgressListener(conf)
       listenerBus.addListener(listener)

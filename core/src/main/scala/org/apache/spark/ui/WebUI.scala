@@ -76,6 +76,7 @@ private[spark] abstract class WebUI(
   }
 
   /** Attach a page to this UI. */
+  // #wisely : create two handler for page
   def attachPage(page: WebUIPage) {
     val pagePath = "/" + page.prefix
     val renderHandler = createServletHandler(pagePath,

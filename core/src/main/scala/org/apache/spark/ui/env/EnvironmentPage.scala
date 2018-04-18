@@ -27,6 +27,8 @@ import org.apache.spark.util.Utils
 private[ui] class EnvironmentPage(parent: EnvironmentTab) extends WebUIPage("") {
   private val listener = parent.listener
 
+  // #wisely : render environment page
+  // #wisely : get data from parent listener
   def render(request: HttpServletRequest): Seq[Node] = {
     val runtimeInformationTable = UIUtils.listingTable(
       propertyHeader, jvmRow, listener.jvmInformation, fixedWidth = true)

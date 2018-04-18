@@ -385,7 +385,10 @@ class SparkContext(config: SparkConf) extends Logging {
     Utils.setLogLevel(org.apache.log4j.Level.toLevel(upperCased))
   }
 
+  // #wisely : initialized sparkContext
   try {
+    
+    // #wisely : validate sparkConf setting
     _conf = config.clone()
     _conf.validateSettings()
 
@@ -443,6 +446,7 @@ class SparkContext(config: SparkConf) extends Logging {
     listenerBus.addListener(jobProgressListener)
 
     // Create the Spark execution environment (cache, map output tracker, etc)
+    // #wisely : due to a lot of msg in SparkEnv will ingest into listenerBus, should create listerner before SparkEnv created 
     _env = createSparkEnv(_conf, isLocal, listenerBus)
     SparkEnv.set(_env)
 
@@ -452,8 +456,10 @@ class SparkContext(config: SparkConf) extends Logging {
       _conf.set("spark.repl.class.uri", replUri)
     }
 
+    // #wisely : create UI's status tracker
     _statusTracker = new SparkStatusTracker(this)
 
+    // #wisely : create UI progressBar
     _progressBar =
       if (_conf.getBoolean("spark.ui.showConsoleProgress", true) && !log.isInfoEnabled) {
         Some(new ConsoleProgressBar(this))
@@ -461,6 +467,7 @@ class SparkContext(config: SparkConf) extends Logging {
         None
       }
 
+    // #wisely : Initial UI
     _ui =
       if (conf.getBoolean("spark.ui.enabled", true)) {
         Some(SparkUI.createLiveUI(this, _conf, listenerBus, _jobProgressListener,
@@ -471,6 +478,7 @@ class SparkContext(config: SparkConf) extends Logging {
       }
     // Bind the UI before starting the task scheduler to communicate
     // the bound port to the cluster manager properly
+    // #wisely : Bind the port
     _ui.foreach(_.bind())
 
     _hadoopConfiguration = SparkHadoopUtil.get.newConfiguration(_conf)
@@ -508,6 +516,8 @@ class SparkContext(config: SparkConf) extends Logging {
 
     // We need to register "HeartbeatReceiver" before "createTaskScheduler" because Executor will
     // retrieve "HeartbeatReceiver" in the constructor. (SPARK-6640)
+    // #wisely : create heartnbeat receiver for rpcEnv's dispatcher 
+    // #wisely : and get RpcEndpointRef
     _heartbeatReceiver = env.rpcEnv.setupEndpoint(
       HeartbeatReceiver.ENDPOINT_NAME, new HeartbeatReceiver(this))
 
@@ -606,6 +616,8 @@ class SparkContext(config: SparkConf) extends Logging {
         throw e
       }
   }
+  // #wisely : initialized sparkContext ended
+
 
   /**
    * Called by the web UI to obtain executor thread dumps.  This method may be expensive.

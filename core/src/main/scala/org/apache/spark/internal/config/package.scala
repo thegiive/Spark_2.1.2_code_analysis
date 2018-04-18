@@ -23,6 +23,8 @@ import org.apache.spark.launcher.SparkLauncher
 import org.apache.spark.network.util.ByteUnit
 import org.apache.spark.util.Utils
 
+// #wisely : get config
+
 package object config {
 
   private[spark] val DRIVER_CLASS_PATH =
